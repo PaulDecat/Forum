@@ -5,27 +5,26 @@ import (
 	"net/http"
 )
 
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/index" {
-		http.Error(w, "404 not found.", http.StatusNotFound)
-		return
-	}
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./front/index.html")
+}
 
-	if r.Method != "GET" {
-		http.Error(w, "Method is not supported.", http.StatusNotFound)
-		return
-	}
+func createPHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./front/createp.html")
+}
 
-	fmt.Fprintf(w, "Hello!")
+func lookfsubHandler(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./front/lookfsub.html")
 }
 
 func main() {
-
 	fileServer := http.FileServer(http.Dir("./front"))
 	http.Handle("/", fileServer)
-	http.HandleFunc("/index", helloHandler)
+	http.HandleFunc("/index", indexHandler)
+	http.HandleFunc("/createP", createPHandler)
+	http.HandleFunc("/lookfsub", lookfsubHandler)
 
-	fmt.Printf("Starting server http://localhost:8080")
+	fmt.Printf("Starting server at http://localhost:8080\n")
 
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		fmt.Println("Erreur:", err)

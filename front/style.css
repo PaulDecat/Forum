@@ -1,8 +1,112 @@
 body {
-    background-color: grey;
+    background-color: darkblue;
 }
 
 .top-page {
-    background-color: white;
-    
+    background-color: black;
+    color: white;
+    border-radius: 10px 100px / 120px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 1400px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    text-align: center;
+
+}
+
+.utilities {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: 150px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-top: 1px;
+    justify-content: space-between;
+}
+
+.mybutton1 {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: darkorange;
+    background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 20%),
+    rgb(0 0 0 / 20%) 30%,
+    rgb(0 0 0 / 0%)
+  );
+}
+
+.mybutton2 {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: darkorange;
+    background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 20%),
+    rgb(0 0 0 / 20%) 30%,
+    rgb(0 0 0 / 0%)
+  );
+}
+
+.mybutton3 {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: darkorange;
+    background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 20%),
+    rgb(0 0 0 / 20%) 30%,
+    rgb(0 0 0 / 0%)
+  );
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.subcontainer2 {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: 500px;
+    width: 925px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-top: 1px;
+}
+
+.subcontainer3 {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: 500px;
+    width: 325px;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-top: 1px;
 }
