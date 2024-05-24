@@ -1,0 +1,22 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to left, lightblue, blue);
+}
+
+.connexion-system {
+    background-color: white;
+    height:400px;
+    width: 395px;
+    padding-left: auto;
+    border-radius: 20px;
+    margin-top: 110px;
+}
+
+button{
+    margin-top: 30px;
+    height: 95px;
+    width: 99px;
+}
+
