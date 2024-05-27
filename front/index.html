@@ -21,16 +21,42 @@
         <form action="/lookfsub" method="get">
             <button class="mybutton3" type="submit">Rechercher un Sujet</button>
         </form>
+        <nav>
+            <a href="/index">Accueil</a>
+            <a href="/createP">Créer un Post</a>
+            <a href="/lookfsub">Rechercher un Sujet</a>
+            <a href="/logout">Se déconnecter</a>
+        </nav>
     </div>
     <br>
     <div class="container">
+        <tbody id="post-number"></tbody>
         <div class="subcontainer2">
             <h3>Les Post:</h3>
-            <div class="totalPost"></div>
+            <div class="totalPost" id="totalPost">
+            </div>
         </div>
         <div class="subcontainer3">
             <h3>Les News:</h3>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = localStorage.getItem('postTitle');
+            const content = localStorage.getItem('postContent');
+
+            if (title && content) {
+                const totalPostDiv = document.getElementById('totalPost');
+                totalPostDiv.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${content}</p>
+                `;
+
+                
+                localStorage.removeItem('postTitle');
+                localStorage.removeItem('postContent');
+            }
+        });
+    </script>
 </body>
 </html>

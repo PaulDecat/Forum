@@ -22,5 +22,27 @@
             <button class="mybutton3" type="submit">Rechercher un Sujet</button>
         </form>
     </div>
+    <div class="creatingform">
+        <h3>Création de Post:</h3>
+        <div class="creatingmypost">
+            <h3>Veuillez donner un titre et un texte à votre Post:</h3>
+            <h5><i>Attention! Tout texte pouvant heurter la sensibilité d'un utilisateur entrainera une suspension de compte!</i></h5>
+            <form id="post-content" action="/index" method="get" onsubmit="savePostToLocalStorage()">
+                <input type="text" name="title" id="postitle" placeholder="Titre du Post" required>
+                <br>
+                <textarea name="content" id="postext" placeholder="Contenu du Post" required></textarea>
+                <br>
+                <input class="mybutton4" type="submit" value="Créer mon Post"/>
+            </form>
+        </div>
+    </div>
+    <script>
+        function savePostToLocalStorage() {
+            const title = document.getElementById('postitle').value;
+            const content = document.getElementById('postext').value;
+            localStorage.setItem('postTitle', title);
+            localStorage.setItem('postContent', content);
+        }
+    </script>
 </body>
 </html>
