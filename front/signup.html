@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le forum</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-box">
+        <form class="form" action="/submituser" method="post">
+            <span class="form-title">Connexion</span>
+            <span class="form-subtitle">Créez un compte gratuit avec votre email.</span>
+            <div class="form-container">
+                <input type="text" class="input" name="username" placeholder="Username" required>
+                <input type="email" class="input" name="email" placeholder="Email" required>
+                <input type="password" class="input" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Connexion</button>
+        </form>
+        <div class="form-section">
+          <p>Déja un compte? <a href="/login">Connectez vous!</a> </p>
+        </div>
+    </div>
+</body>
+</html>
