@@ -1,0 +1,226 @@
+body {
+    background: linear-gradient(to top, lightblue, blue);
+}
+
+.top-page {
+    background-color: black;
+    color: white;
+    border-radius: 10px 100px / 120px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 1400px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    text-align: center;
+    transition: width 2s;
+
+}
+
+.utilities {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: 150px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-top: 1px;
+    justify-content: space-between;
+}
+
+.mybutton1 {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: darkorange;
+    background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 20%),
+    rgb(0 0 0 / 20%) 30%,
+    rgb(0 0 0 / 0%)
+  );
+}
+
+.mybutton2 {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: darkorange;
+    background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 20%),
+    rgb(0 0 0 / 20%) 30%,
+    rgb(0 0 0 / 0%)
+  );
+}
+
+.mybutton3 {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: darkorange;
+    background-image: linear-gradient(
+    to top left,
+    rgb(0 0 0 / 20%),
+    rgb(0 0 0 / 20%) 30%,
+    rgb(0 0 0 / 0%)
+  );
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.subcontainer2 {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: 500px;
+    width: 925px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-top: 1px;
+}
+
+.subcontainer3 {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: 500px;
+    width: 325px;
+    margin-left: auto;
+    padding-left: 10px;
+    padding-top: 1px;
+}
+
+.creatingform {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    height: 650px;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+    padding-left: 10px;
+}
+
+.creatingmypost {
+    background-color: grey;
+    color: white;
+    border-radius: 20px;
+    height: 500px;
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+/*FORM--------------------------------*/
+
+.form-box {
+    max-width: 396px;
+    background: #f1f7fe;
+    overflow: hidden;
+    border-radius: 16px;
+    color: #010101;
+    margin-top: 250px;
+    
+  }
+  
+  .form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px 24px;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  /*Form text*/
+  .form-title {
+    font-weight: bold;
+    font-size: 2.4rem;
+  }
+  
+  .form-subtitle {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /*Inputs box*/
+  .form-container {
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    margin: 1rem 0 .5rem;
+    width: 100%;
+  }
+  
+  .input {
+    background: none;
+    border: 0;
+    outline: 0;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    font-size: .9rem;
+    padding: 8px 15px;
+  }
+  
+  .form-section {
+    padding: 16px;
+    font-size: 1.5rem;
+    background-color: #e0ecfb;
+    box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+  }
+  
+  .form-section a {
+    font-weight: bold;
+    color: #0066ff;
+    transition: color .3s ease;
+  }
+  
+  .form-section a:hover {
+    color: #005ce6;
+    text-decoration: underline;
+  }
+  
+  /*Button*/
+  .form button {
+    background-color: #0066ff;
+    color: #fff;
+    border: 0;
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .3s ease;
+  }
+  
+  .form button:hover {
+    background-color: #005ce6;
+  }
+
