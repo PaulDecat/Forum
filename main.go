@@ -60,10 +60,10 @@ func createTables() {
 	createPostTable := `
     CREATE TABLE IF NOT EXISTS Post (
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
+		Category TEXT,
         Title TEXT,
         Content TEXT,
         UserID INTEGER,
-        Category TEXT,
         Likes INTEGER,
         FOREIGN KEY(UserID) REFERENCES User(ID)
     );`
@@ -123,7 +123,7 @@ func submitPostHandler(w http.ResponseWriter, r *http.Request) {
 		content := r.FormValue("content")
 		userID := 1 // Pour test
 
-		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes) VALUES (?, ?, ?, ?, 0)", title, content, userID, "General")
+		_, err := db.Exec("INSERT INTO Post (Category, Title, Content, UserID, Likes) VALUES (?, ?, ?, ?, 0)", "General", title, content, userID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
