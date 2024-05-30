@@ -78,7 +78,7 @@ body {
 nav  a{ /* tous les liens a à l'intérieur de la balise nav */
     float: left; /* effet flottant */
     text-decoration: none; /* pas d'héritage avec effet souligné */
-    color: white; /* couleur du texte */
+    color: black; /* couleur du texte */
     background: orange; /* couleur de fond */
     height: 36px; /* hauteur */
     line-height: 33px; /* interligne */
@@ -88,63 +88,57 @@ nav  a{ /* tous les liens a à l'intérieur de la balise nav */
     transition: .5s; /* temps de transition lors du hover : une demi seconde */
     border-radius: 20px;
     
-    }
+}
+
+nav  b{ /* tous les liens a à l'intérieur de la balise nav */
+  float: left; /* effet flottant */
+  text-decoration: none; /* pas d'héritage avec effet souligné */
+  color: black; /* couleur du texte */
+  background: transparent; /* couleur de fond */
+  height: 36px; /* hauteur */
+  line-height: 33px; /* interligne */
+  padding: 0 10px; /* marges intérieur */
+  font-family: sans-serif; /* police d'écriture */
+  font-size: 13px; /* taille du texte */
+  transition: .5s; /* temps de transition lors du hover : une demi seconde */
+  border-radius: 20px;
+  
+}
+
     nav  a:hover{ /* tous liens lors du survol dans la balise nav */
     background: #f43c80; /* couleur de fond */
     }
-
-.mybutton1 {
-    border: 0;
-    line-height: 2.5;
-    padding: 0 20px;
-    font-size: 1rem;
-    text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 10px;
-    background-color: darkorange;
-    background-image: linear-gradient(
-    to top left,
-    rgb(0 0 0 / 20%),
-    rgb(0 0 0 / 20%) 30%,
-    rgb(0 0 0 / 0%)
-  );
+.precision {
+  background-color: #f0f0f0cd;
+  color: black;
+  border-radius: 10px 100px / 120px;
+  margin-bottom: 10px;
+  height: 100px;
+  width: 1430px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  margin-left: 20px;
+  margin-top: 30px;
+  transition: width 2s;
 }
 
-.mybutton2 {
-    border: 0;
-    line-height: 2.5;
-    padding: 0 20px;
-    font-size: 1rem;
-    text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 10px;
-    background-color: darkorange;
-    background-image: linear-gradient(
-    to top left,
-    rgb(0 0 0 / 20%),
-    rgb(0 0 0 / 20%) 30%,
-    rgb(0 0 0 / 0%)
-  );
-}
-
-.mybutton3 {
-    border: 0;
-    line-height: 2.5;
-    padding: 0 20px;
-    font-size: 1rem;
-    text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 10px;
-    background-color: darkorange;
-    background-image: linear-gradient(
-    to top left,
-    rgb(0 0 0 / 20%),
-    rgb(0 0 0 / 20%) 30%,
-    rgb(0 0 0 / 0%)
-  );
+.form-box{
+  
+  background-color: #f0f0f0cd;
+  color: black;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  
+  height: 400px;
+  width: 350px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  transition: width 2s;
 }
 
 .container {
@@ -184,7 +178,7 @@ nav  a{ /* tous les liens a à l'intérieur de la balise nav */
     width: 1000px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 75px;
+    margin-top: 40px;
     padding-left: 10px;
 }
 
@@ -217,6 +211,45 @@ nav  a{ /* tous les liens a à l'intérieur de la balise nav */
     flex-direction: row;
     justify-content: center;
 }
+
+.mytext {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f0f0f0cd;
+  color: black;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  margin-left: 20px;
+  margin-top: 30px;
+  transition: width 2s;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.CGU {
+  padding: 20px;
+  background-color: transparent;
+}
+
+.CGU h4 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.CGU-text p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+}
+
 
 ul {
     list-style: none;
