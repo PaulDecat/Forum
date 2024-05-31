@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
@@ -13,15 +15,17 @@ func main() {
 	}
 	defer db.Close()
 
-	http.HandleFunc("/", redirectToSignUp)
+	fileServer := http.FileServer(http.Dir("./templates"))
+	http.Handle("/", fileServer)
+	http.HandleFunc("/index", indexHandler)
+	http.HandleFunc("/createP", createPostHandler)
+	http.HandleFunc("/mypage", mypageHandler)
+	http.HandleFunc("/parameters", parametersHandler)
 	http.HandleFunc("/signup", signUpHandler)
-	http.HandleFunc("/createpost", createPostHandler)
-	http.HandleFunc("/submitpost", submitPostHandler)
-	http.HandleFunc("/submituser", submitUserHandler)
 	http.HandleFunc("/terms", termsHandler)
 	http.HandleFunc("/rgpd", rgpdHandler)
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.HandleFunc("/submituser", submitUserHandler)
 
-	log.Println("Server started at :8080")
+	log.Println("Starting server at http://localhost:8080\n")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
