@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Créer un Post</title>
+</head>
+<body>
+    <div class="top-page">
+        <h1>Créez votre Post</h1>
+    </div>
+    <div class="utilities">
+        <h3>Se diriger vers:</h3>
+        <form action="/index" method="get">
+            <button class="mybutton1" type="submit">L'Accueil</button>
+        </form>
+        <form action="/createpost" method="get">
+            <button class="mybutton2" type="submit">Créer mon Post</button>
+        </form>
+        <form action="/lookfsub" method="get">
+            <button class="mybutton3" type="submit">Rechercher un Sujet</button>
+        </form>
+    </div>
+    <div class="creatingform">
+        <h3>Création de Post:</h3>
+        <div class="creatingmypost">
+            <h3>Veuillez donner un titre et un texte à votre Post:</h3>
+            <h5><i>Attention! Tout texte pouvant heurter la sensibilité d'un utilisateur entrainera une suspension de compte!</i></h5>
+            <form id="post-content" action="/submitpost" method="post">
+                <input type="text" name="title" id="postitle" placeholder="Titre du Post" required>
+                <br>
+                <textarea name="content" id="postext" placeholder="Contenu du Post" required></textarea>
+                <br>
+                <input class="mybutton4" type="submit" value="Créer mon Post"/>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
