@@ -168,23 +168,5 @@
         </div>
         
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const title = localStorage.getItem('postTitle');
-            const content = localStorage.getItem('postContent');
-
-            if (title && content) {
-                const totalPostDiv = document.getElementById('totalPost');
-                totalPostDiv.innerHTML = `
-                    <h3>${title}</h3>
-                    <p>${content}</p>
-                `;
-
-                
-                localStorage.removeItem('postTitle');
-                localStorage.removeItem('postContent');
-            }
-        });
-    </script>
 </body>
 </html>
