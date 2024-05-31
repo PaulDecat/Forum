@@ -23,6 +23,7 @@ func main() {
 
 	fileServer := http.FileServer(http.Dir("./templates"))
 	http.Handle("/", fileServer)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	http.HandleFunc("/index", indexHandler)
 	http.HandleFunc("/createP", createPostHandler)
 	http.HandleFunc("/mypage", mypageHandler)
