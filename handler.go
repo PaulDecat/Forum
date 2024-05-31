@@ -55,12 +55,12 @@ func createTables() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./front/index.html")
+	http.ServeFile(w, r, "./templates/index.html")
 }
 
 func createPostHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
-		http.ServeFile(w, r, "./front/createP.html")
+		http.ServeFile(w, r, "./templates/createP.html")
 		return
 	} else if r.Method == http.MethodPost {
 		title := r.FormValue("title")
@@ -78,27 +78,27 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func mypageHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./front/mypage.html")
+	http.ServeFile(w, r, "./templates/mypage.html")
 }
 
 func parametersHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./front/parameters.html")
+	http.ServeFile(w, r, "./templates/parameters.html")
 }
 
 func redirectToSignUp(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "./front/signup.html", http.StatusSeeOther)
+	http.Redirect(w, r, "./templates/signup.html", http.StatusSeeOther)
 }
 
 func signUpHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./front/signup.html")
+	http.ServeFile(w, r, "./templates/signup.html")
 }
 
 func termsHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./front/terms.html")
+	http.ServeFile(w, r, "./templates/terms.html")
 }
 
 func rgpdHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./front/rgpd.html")
+	http.ServeFile(w, r, "./templates/rgpd.html")
 }
 
 func submitUserHandler(w http.ResponseWriter, r *http.Request) {

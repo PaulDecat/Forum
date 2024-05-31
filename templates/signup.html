@@ -1,80 +1,59 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>RGPD</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Les 3 Mousquetaires</title>
 </head>
 <body>
     <div class="top-page">
         <div class="top-page-left">
-            <div class="burger-icon">
-                <label class="burger" for="burger">
-                    <input class="line" type="checkbox" id="burger" />
-                </label>
-            </div>
+          <div class="burger-icon">
+            <label class="burger" for="burger">
+              <input class="line" type="checkbox" id="burger" />
+            </label>
+          </div>
         </div>
         <div class="top-page-center">
-            <h1>RGPD</h1>
+            <h1>Le Forum</h1>
         </div>
         <div class="top-page-right">
-            <div class="spinner">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+          <div class="spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
         </div>
+        
+        
     </div>
-    <div class="utilities">
-        <h3>Se diriger vers:</h3>
-        <nav>
-            <a href="/index">Accueil</a> 
-            <a href="/createP">Créer un Post</a>
-            <a href="/mypage">Votre Profil</a>
-            <a href="/signup">Se connecter</a>
-            <a href="/parameters">Paramètres</a>
-        </nav>
+    <div class="precision">
+        <h2>Vous n'avez pas de compte?</h2>
+        <p>Créez-en un pour profiter pleinement des fonctionnalités du site.</p>
     </div>
     <br>
-    <div class="mytext">
-        <div class="RGPD1">
-            <h4>Réglementation Générale de la Protection des Données</h4>
-            <div class="RGPD-text">
-                <p>La Réglementation Générale sur la Protection des Données (RGPD)
-                    La Réglementation Générale sur la Protection des Données (RGPD), également connue sous le nom de General Data Protection Regulation (GDPR) en anglais, est un règlement européen entré en vigueur le 25 mai 2018. Il a pour objectif de renforcer les droits des citoyens européens en matière de protection de leurs données personnelles.
-                    
-                    Le RGPD s'applique à toutes les organisations qui traitent des données personnelles, qu'elles soient publiques ou privées, et ce, quel que soit leur secteur d'activité.
-                    
-                    Voici quelques-uns des principes clés du RGPD :
-                    
-                    Licéité, transparence et limitation des finalités du traitement: Les données personnelles ne peuvent être collectées que pour des finalités déterminées, explicites et légitimes, et ne peuvent être traitées ultérieurement d'une manière incompatible avec ces finalités.
-                    Minimisation des données: Les données personnelles collectées doivent être adéquates, pertinentes et limitées à ce qui est nécessaire au regard des finalités pour lesquelles elles sont traitées.
-                    Exactitude des données: Les données personnelles doivent être exactes et, si nécessaire, mises à jour.
-                    Limitation de la conservation des données: Les données personnelles doivent être conservées sous une forme permettant l'identification des personnes concernées pendant une durée n'excédant pas celle nécessaire aux finalités pour lesquelles elles sont traitées.
-                    Sécurité des données: Les données personnelles doivent être traitées de manière à garantir une sécurité appropriée des données personnelles, y compris la protection contre le traitement non autorisé ou illicite et contre la perte, la destruction ou les dommages accidentels, en mettant en œuvre les mesures techniques ou organisationnelles appropriées.
-                    Responsabilisation du responsable du traitement: Le responsable du traitement est responsable du respect des principes énoncés ci-dessus et doit être en mesure de démontrer sa conformité.
-                    Le RGPD prévoit également un certain nombre de droits pour les personnes concernées, notamment :
-                    
-                    Le droit d'accès à leurs données personnelles.
-                    Le droit de rectification de leurs données personnelles.
-                    Le droit d'effacement de leurs données personnelles.
-                    Le droit de limitation du traitement de leurs données personnelles.
-                    Le droit à la portabilité de leurs données personnelles.
-                    Le droit d'opposition au traitement de leurs données personnelles.
-                    Les organisations qui ne respectent pas le RGPD s'exposent à des sanctions importantes, pouvant aller jusqu'à 4 % du chiffre d'affaires annuel mondial ou 20 millions d'euros, selon le montant le plus élevé.
-                    
-                    Pour plus d'informations sur le RGPD, vous pouvez consulter le site web de la CNIL : https://www.cnil.fr/en
-                    
-                    En résumé, le RGPD est un règlement important qui a des implications majeures pour toutes les organisations qui traitent des données personnelles. Il est important de se conformer aux exigences du RGPD afin de protéger les droits des citoyens européens et d'éviter les sanctions.</p>
+    <div class="form-box">
+        <form class="form">
+            <h2>Se Connecter</h2>
+            <div class="form-container">
+                <input type="text" class="input" placeholder="Username">
+                <br>
+                <input type="email" class="input" placeholder="Email">
+                <br>
+                <input type="password" class="input" placeholder="Password">
             </div>
+            <button>S'inscrire</button>
+        </form>
+        <div class="form-section">
+          <p>Vous avez déjà un compte? <a href="">Se connecter</a> </p>
         </div>
     </div>
     <br>
-    <div class="footer">
+    <div class ="footer">
         <div class="droits">
             <nav>
                 <a href="/terms">Conditions générales d'utilisation</a> 
@@ -176,6 +155,11 @@
               </ul>
               
         </div>
+        
     </div>
+
+
 </body>
+
+
 </html>

@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Créer un Post</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Les 3 Mousquetaires</title>
 </head>
 <body>
-    <div class="top-page">
-        <div class="top-page-left">
-          <div class="burger-icon">
-            <label class="burger" for="burger">
-              <input class="line" type="checkbox" id="burger" />
-            </label>
-          </div>
-        </div>
-        <div class="top-page-center">
-            <h1>Créez votre Post</h1>
-        </div>
-        <div class="top-page-right">
-          <div class="spinner">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-          </div>
-        </div>
-        
-        
+  <div class="top-page">
+    <div class="top-page-left">
+      <div class="burger-icon">
+        <label class="burger" for="burger">
+          <input class="line" type="checkbox" id="burger" />
+        </label>
+      </div>
     </div>
+    <div class="top-page-center">
+        <h1>Parametres</h1>
+    </div>
+    <div class="top-page-right">
+      <div class="spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+      </div>
+    </div>
+    
+    
+</div>
     <div class="utilities">
         <h3>Se diriger vers:</h3>
         <nav>
@@ -40,20 +40,6 @@
             <a href="/signup">Se connecter</a>
             <a href="/parameters">Parametres</a>
         </nav>
-    </div>
-    <div class="creatingform">
-        <h3>Création de Post:</h3>
-        <div class="creatingmypost">
-            <h3>Veuillez donner un titre et un texte à votre Post:</h3>
-            <h5><i>Attention! Tout texte pouvant heurter la sensibilité d'un utilisateur entrainera une suspension de compte!</i></h5>
-            <form id="post-content" action="/submitpost" method="post">
-                <input type="text" name="title" id="postitle" placeholder="Titre du Post" required>
-                <br>
-                <textarea name="content" id="postext" placeholder="Contenu du Post" required></textarea>
-                <br>
-                <input class="mybutton4" type="submit" value="Créer mon Post"/>
-            </form>
-        </div>
     </div>
     <br>
     <div class ="footer">
@@ -158,6 +144,7 @@
               </ul>
               
         </div>
+        
     </div>
 </body>
 </html>

@@ -21,7 +21,7 @@ func main() {
 
 	createTables()
 
-	fileServer := http.FileServer(http.Dir("./front"))
+	fileServer := http.FileServer(http.Dir("./templates"))
 	http.Handle("/", fileServer)
 	http.HandleFunc("/index", indexHandler)
 	http.HandleFunc("/createP", createPostHandler)
