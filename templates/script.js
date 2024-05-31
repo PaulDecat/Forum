@@ -20,5 +20,3 @@ fetch('createp.html')
     };
     tp.send();
   });
-
-  

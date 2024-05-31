@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/styles.css">
     <title>Les 3 Mousquetaires</title>
 </head>
 <body>
@@ -47,8 +47,15 @@
         <tbody id="post-number"></tbody>
         <div class="subcontainer2">
             <h3>Les Post:</h3>
-            
             <div class="totalPost" id="totalPost">
+              {{range .}}
+    <div class="post">
+        <h2>{{.Title}}</h2>
+        <p>{{.Content}}</p>
+        <p>Category: {{.Category}}</p>
+        <p>Likes: {{.Likes}}</p>
+    </div>
+              {{end}}
             </div>
         </div>
         <div class="subcontainer3">
