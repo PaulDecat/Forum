@@ -1,41 +1,32 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
 	"log"
 	"net/http"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var db *sql.DB
-
 func main() {
 	var err error
-	db, err = sql.Open("sqlite3", "./blog.db")
+	db, err = initDB("./data.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	createTables()
-
-	fileServer := http.FileServer(http.Dir("./templates"))
-	http.Handle("/", fileServer)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
-	http.HandleFunc("/index", indexHandler)
-	http.HandleFunc("/createP", createPostHandler)
-	http.HandleFunc("/mypage", mypageHandler)
-	http.HandleFunc("/parameters", parametersHandler)
+
+	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/signup", signUpHandler)
+	http.HandleFunc("/createP", createPostHandler)
+	http.HandleFunc("/submituser", submitUserHandler)
+	http.HandleFunc("/submitpost", submitPostHandler)
 	http.HandleFunc("/terms", termsHandler)
 	http.HandleFunc("/rgpd", rgpdHandler)
-	http.HandleFunc("/submituser", submitUserHandler)
+	http.HandleFunc("/mypage", mypageHandler)
+	http.HandleFunc("/parameters", parametersHandler)
 
-	fmt.Printf("Starting server at http://localhost:8080\n")
-
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		fmt.Println("Erreur:", err)
-	}
+	log.Println("Starting server at http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

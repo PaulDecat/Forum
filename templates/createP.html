@@ -46,8 +46,10 @@
         <div class="creatingmypost">
             <h3>Veuillez donner un titre et un texte à votre Post:</h3>
             <h5><i>Attention! Tout texte pouvant heurter la sensibilité d'un utilisateur entrainera une suspension de compte!</i></h5>
-            <form id="post-content" action="/index" method="post">
+            <form id="post-content" action="/submitpost" method="post">
                 <input type="text" name="title" id="postitle" placeholder="Titre du Post" required>
+                <br>
+                <input type="text" name="category" id="postcategory" placeholder="Categorie" required>
                 <br>
                 <textarea name="content" id="postext" placeholder="Contenu du Post" required></textarea>
                 <br>
