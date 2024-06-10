@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
+	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -67,7 +69,7 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 		content := r.FormValue("content")
 		userID := 1 // Pour test
 
-		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes) VALUES (?, ?, ?, ?, 0)", title, content, userID, "General")
+		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, "General")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -100,7 +102,7 @@ func submitPostHandler(w http.ResponseWriter, r *http.Request) {
 		content := r.FormValue("content")
 		userID := 1 // Pour test
 
-		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes) VALUES (?, ?, ?, ?, 0)", title, content, userID, category)
+		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, category)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -124,4 +126,26 @@ func mypageHandler(w http.ResponseWriter, r *http.Request) {
 
 func parametersHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/parameters.html")
+}
+
+func handleAddLike(w http.ResponseWriter, r *http.Request) {
+	postIDStr := r.FormValue("Like")
+	postID, err := strconv.Atoi(postIDStr)
+	fmt.Println(err)
+	if err != nil {
+		http.Error(w, "Invalid post ID", http.StatusBadRequest)
+		return
+	}
+	updateLikes(w, r, db, postID)
+	w.WriteHeader(http.StatusOK)
+}
+
+func handleAddDislike(w http.ResponseWriter, r *http.Request) {
+	postIDStr := r.FormValue("Dislike")
+	postID, err := strconv.Atoi(postIDStr)
+	if err != nil {
+		http.Error(w, "Invalid post ID", http.StatusBadRequest)
+		return
+	}
+	updateDislikes(w, r, db, postID)
 }

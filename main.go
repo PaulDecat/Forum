@@ -24,6 +24,8 @@ func main() {
 	http.HandleFunc("/submitpost", submitPostHandler)
 	http.HandleFunc("/terms", termsHandler)
 	http.HandleFunc("/rgpd", rgpdHandler)
+	http.HandleFunc("/addlike", handleAddLike)
+	http.HandleFunc("/adddislike", handleAddDislike)
 	http.HandleFunc("/mypage", mypageHandler)
 	http.HandleFunc("/parameters", parametersHandler)
 

@@ -14,4 +14,5 @@ type Post struct {
 	UserID   int
 	Category string
 	Likes    int
+	Dislikes int
 }

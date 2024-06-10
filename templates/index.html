@@ -65,11 +65,19 @@
         <h2>{{.Title}}</h2>
         <p>{{.Content}}</p>
         <p>Categories: {{.Category}}</p>
-        <p>Appreciation: </p>
-        <button onclick="monlike()">Like</button>
-        <button onclick="mondislike()">Dislike</button>
-        <button onclick="monunlike()">Unlike</button>
-        <span id="c">0</span>        
+        <p>Appreciation: {{.Likes}} </p>
+        
+        
+        <div>
+          <form action="/addlike">
+            <input type="hidden" name="Like" value="{{.ID}}">
+            <button type="submit">Like</button>
+          </form>
+          <form action="/adddislike">
+            <input type="hidden" name="Dislike" value="{{.ID}}">
+            <button type="submit">Dislike</button>
+          </form>        
+        </div>
     </div>
               {{end}}
             </div>
@@ -200,20 +208,39 @@
     let c = 0;
     let isLiked = false;
 
-    function monlike(){
-      c = "+1"
-      document.getElementById('c').innerHTML = c;
-           
-    }
-    function mondislike(){
-      c = "-1"
-      document.getElementById('c').innerHTML = c;
-           
+    function addLike(postId) {
+        fetch(`/addlike?postId=${postId}`, { method: 'POST' })
+          .then(response => {
+            if (response.ok) {
+              console.log(`Post ${postId} liked successfully.`);
+            } else {
+              console.error(`Failed to like post ${postId}.`);
+            }
+          })
+          .catch(error => console.error(`Error liking post ${postId}:`, error));
+      }
+
+    
+    function adddislike(){
+      const doadislike = document.getElementById('dislike');
+      if (doadislike.checked === true) {
+         Likes = Likes - 1;
+      }
     }
     function monunlike(){
       c = "0"
       document.getElementById('c').innerHTML = c;
            
+    }
+
+    function addLike(postId) {
+      fetch('/addlike?postId=' + postId)
+      .then(response => response.json())
+      .then(data => {
+        const likeButton = document.querySelector(`button[data-post-id="${postId}"]`);
+        likeButton.textContent = `Like (${data.likesCount})`;
+      })
+      .catch(error => console.error('Error:', error));
     }
 
 

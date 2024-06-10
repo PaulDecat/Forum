@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"net/http"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -21,6 +22,7 @@ func initDB(dataSourceName string) (*sql.DB, error) {
 	}
 
 	return db, nil
+
 }
 
 func createTables(db *sql.DB) error {
@@ -40,6 +42,7 @@ func createTables(db *sql.DB) error {
         Content TEXT,
         UserID INTEGER,
         Likes INTEGER,
+		Dislikes INTEGER,
         FOREIGN KEY(UserID) REFERENCES User(ID)
     );`
 
@@ -58,4 +61,29 @@ func createTables(db *sql.DB) error {
 	log.Println("Post table created successfully or already exists")
 
 	return nil
+}
+
+func updateLikes(w http.ResponseWriter, r *http.Request, db *sql.DB, postID int) {
+	updateMyLikes := `UPDATE Post SET Likes = Likes + 1 WHERE ID =?;`
+	_, err := db.Exec(updateMyLikes, postID)
+
+	println("dffsdfsd")
+
+	if err != nil {
+		log.Printf("Error updating likes for post ID %d: %v", postID, err)
+		return
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func updateDislikes(w http.ResponseWriter, r *http.Request, db *sql.DB, postID int) {
+	updateMyDislikes := `UPDATE Post SET Likes = Likes - 1 WHERE ID =?;`
+	_, err := db.Exec(updateMyDislikes, postID)
+
+	if err != nil {
+		log.Printf("Error updating dislikes for post ID %d: %v", postID, err)
+		return
+	}
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
