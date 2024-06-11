@@ -3,53 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les 3 Mousquetaires</title>
+    <title>Login - Les 3 Mousquetaires</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div class="top-page">
         <div class="top-page-left">
-          <div class="burger-icon">
-            <label class="burger" for="burger">
-              <input class="line" type="checkbox" id="burger" />
-            </label>
-          </div>
+            <div class="burger-icon">
+                <label class="burger" for="burger">
+                    <input class="line" type="checkbox" id="burger" />
+                </label>
+            </div>
         </div>
         <div class="top-page-center">
             <h1>Le Forum</h1>
         </div>
         <div class="top-page-right">
-          <div class="spinner">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-          </div>
+            <div class="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     </div>
+    
     <div class="precision">
-        <h2>Vous n'avez pas de compte?</h2>
-        <p>Créez-en un pour profiter pleinement des fonctionnalités du site.</p>
+        <h2>Connexion</h2>
+        <p>Connectez-vous pour accéder à votre compte.</p>
     </div>
     <br>
     <div class="form-box">
-        <form class="form" action="/signup" method="post">
-            <span class="form-title">Sign up</span>
-            <span class="form-subtitle">Create a free account with your email.</span>
-            <div class="form-container">
-                <input type="text" class="input" name="username" placeholder="Username" required>
-                <input type="email" class="input" name="email" placeholder="Email" required>
-                <input type="password" class="input" name="password" placeholder="Password" required>
-            </div>
-            <button type="submit">S'inscrire</button>
-        </form>
-        <div class="form-section">
-          <p>Vous avez déjà un compte? <a href="/login">Se connecter</a> </p>
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
         </div>
-    </div>
-    <br>
+        <div class="form-group">
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Connexion</button>
+    </form>
+    <div class="form-section">
+        <p>Vous n'avez pas encore de compte? <a href="/signup">En créer un</a> </p>
+      </div>
+      <br>
     <div class ="footer">
         <div class="droits">
             <nav>

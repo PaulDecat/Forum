@@ -5,6 +5,7 @@ import (
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var db *sql.DB
@@ -58,4 +59,28 @@ func createTables(db *sql.DB) error {
 	log.Println("Post table created successfully or already exists")
 
 	return nil
+}
+
+func hashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+type PasswordCheckResult struct {
+	Success bool
+	Message string
+}
+
+func checkPasswordHash(password, hash string) PasswordCheckResult {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	if err != nil {
+		return PasswordCheckResult{
+			Success: false,
+			Message: "Invalid password",
+		}
+	}
+	return PasswordCheckResult{
+		Success: true,
+		Message: "Password is correct",
+	}
 }
