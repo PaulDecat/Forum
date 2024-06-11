@@ -22,7 +22,6 @@ func main() {
 	http.HandleFunc("/login", loginHandler)
 	http.HandleFunc("/logout", logoutHandler)
 	http.HandleFunc("/createP", createPostHandler)
-	// http.HandleFunc("/submitpost", submitPostHandler)
 	http.HandleFunc("/terms", termsHandler)
 	http.HandleFunc("/rgpd", rgpdHandler)
 	http.HandleFunc("/mypage", mypageHandler)

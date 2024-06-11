@@ -145,31 +145,6 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/login.html")
 }
 
-func createPostHandler(w http.ResponseWriter, r *http.Request) {
-	session, _ := store.Get(r, "session")
-	userID, ok := session.Values["user_id"].(int)
-	if !ok {
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
-		return
-	}
-
-	if r.Method == http.MethodGet {
-		http.ServeFile(w, r, "./templates/createP.html")
-		return
-	} else if r.Method == http.MethodPost {
-		title := r.FormValue("title")
-		content := r.FormValue("content")
-
-		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes) VALUES (?, ?, ?, ?, 0)", title, content, userID, "General")
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		http.Redirect(w, r, "/index", http.StatusSeeOther)
-	}
-}
-
 func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session-name")
 	userID := session.Values["userID"]
@@ -202,6 +177,31 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 	session.Save(r, w)
 
 	t.Execute(w, data)
+}
+
+func createPostHandler(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "session")
+	userID, ok := session.Values["user_id"].(int)
+	if !ok {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		return
+	}
+
+	if r.Method == http.MethodGet {
+		http.ServeFile(w, r, "./templates/createP.html")
+		return
+	} else if r.Method == http.MethodPost {
+		title := r.FormValue("title")
+		content := r.FormValue("content")
+
+		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes) VALUES (?, ?, ?, ?, 0)", title, content, userID, "General")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		http.Redirect(w, r, "/index", http.StatusSeeOther)
+	}
 }
 
 func mypageHandler(w http.ResponseWriter, r *http.Request) {
