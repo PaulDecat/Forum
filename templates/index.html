@@ -7,7 +7,7 @@
     <title>Les 3 Mousquetaires</title>
 </head>
 <body>
-    <div class="top-page">
+    <header class="top-page">
         <div class="top-page-left">
           <div class="burger-icon">
             <label class="burger" for="burger">
@@ -28,25 +28,24 @@
               <div></div>
           </div>
         </div>
-        
-        
-    </div>
-    <div class="utilities">
+    </header>
+
+    <nav class="utilities">
         <h3>Se diriger vers:</h3>
         <nav>
             <a href="/index">Accueil</a> 
             <a href="/createP">Créer un Post</a>
             <a href="/mypage">Votre Profil</a>
             <a href="/signup">Se connecter</a>
-            <a href="/parameters">Parametres</a>
+            <a href="/parameters">Paramètres</a>
         </nav>
-        
-    </div>
+    </nav>
     <br>
-    <div class="container">
-        <tbody id="post-number"></tbody>
-        <div class="subcontainer3">
-          <h3>Les Categories:</h3>
+
+    <main class="container">
+        <section id="post-number"></section>
+        <aside class="subcontainer3">
+          <h3>Les Catégories:</h3>
           <form id="form"> 
             <input type="search" id="query" name="q" placeholder="Search...">
             <button>Search</button>
@@ -56,35 +55,34 @@
             <li><a href="/category/{{.Category}}">{{.Category}}</a></li>
             {{end}}
           </ul> 
-        </div>
-        <div class="subcontainer2">
-            <h3>Les Post:</h3>
+        </aside>
+
+        <section class="subcontainer2">
+            <h3>Les Posts:</h3>
             <div class="totalPost" id="totalPost">
               {{range .}}
-    <div class="post">
-        <h2>{{.Title}}</h2>
-        <p>{{.Content}}</p>
-        <p>Categories: {{.Category}}</p>
-        <p>Appreciation: {{.Likes}} </p>
-        
-        
-        <div>
-          <form action="/addlike">
-            <input type="hidden" name="Like" value="{{.ID}}">
-            <button type="submit">Like</button>
-          </form>
-          <form action="/adddislike">
-            <input type="hidden" name="Dislike" value="{{.ID}}">
-            <button type="submit">Dislike</button>
-          </form>        
-        </div>
-    </div>
+              <article class="post">
+                  <h2>{{.Title}}</h2>
+                  <p>{{.Content}}</p>
+                  <p>Catégories: {{.Category}}</p>
+                  <p>Appréciation: {{.Likes}}</p>
+                  <div>
+                    <form action="/addlike">
+                      <input type="hidden" name="Like" value="{{.ID}}">
+                      <button type="submit">Like</button>
+                    </form>
+                    <form action="/adddislike">
+                      <input type="hidden" name="Dislike" value="{{.ID}}">
+                      <button type="submit">Dislike</button>
+                    </form>        
+                  </div>
+              </article>
               {{end}}
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
     <br>
-    <div class ="footer">
+    <footer class="footer">
       <div class="droits">
         <nav>
             <a href="/terms">Conditions générales d'utilisation</a> 
@@ -156,7 +154,7 @@
                       xml:space="preserve"
                     >
                       <path
-                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
+                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.269.088 3.85.048 4.703.01 5.556 0 5.83 0 8s.01 2.444.048 3.297c.04.853.174 1.434.372 1.943.198.51.462.951.923 1.417.466.462.908.725 1.417.923.509.198 1.09.332 1.943.372C5.556 15.99 5.83 16 8 16s2.444-.01 3.297-.048c.853-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.417-.923 3.9 3.9 0 0 0 .923-1.417c.198-.509.332-1.09.372-1.943.038-.853.048-1.127.048-3.297s-.01-2.444-.048-3.297c-.04-.853-.174-1.434-.372-1.943a3.907 3.907 0 0 0-.923-1.417 3.907 3.907 0 0 0-1.417-.923c-.509-.198-1.09-.332-1.943-.372C10.444.01 10.17 0 8 0ZM8 1.459c2.116 0 2.37.007 3.21.046.775.035 1.197.166 1.475.276.372.145.64.319.92.599.28.28.454.548.599.92.11.278.241.7.276 1.475.039.839.046 1.093.046 3.21s-.007 2.37-.046 3.21c-.035.775-.166 1.197-.276 1.475a2.444 2.444 0 0 1-.599.92 2.444 2.444 0 0 1-.92.599c-.278.11-.7.241-1.475.276-.839.039-1.093.046-3.21.046s-2.37-.007-3.21-.046c-.775-.035-1.197-.166-1.475-.276a2.444 2.444 0 0 1-.92-.599 2.444 2.444 0 0 1-.599-.92c-.11-.278-.241-.7-.276-1.475-.039-.839-.046-1.093-.046-3.21s.007-2.37.046-3.21c.035-.775.166-1.197.276-1.475a2.444 2.444 0 0 1 .599-.92 2.444 2.444 0 0 1 .92-.599c.278-.11.7-.241 1.475-.276.839-.039 1.093-.046 3.21-.046ZM8 3.891A4.109 4.109 0 1 0 8 12.11 4.109 4.109 0 0 0 8 3.89Zm0 1.459a2.65 2.65 0 1 1 0 5.301 2.65 2.65 0 0 1 0-5.301Zm5.223-.933a.959.959 0 1 0-.001 1.917.959.959 0 0 0 .001-1.917Z"
                         fill="currentColor"
                       ></path>
                     </svg>
@@ -164,87 +162,31 @@
                   <div class="tooltip">Instagram</div>
                 </li>
                 <li class="icon-content">
-                  <a href="https://youtube.com/" aria-label="Youtube" data-social="youtube">
+                  <a
+                    href="https://www.facebook.com/"
+                    aria-label="Facebook"
+                    data-social="facebook"
+                  >
                     <div class="filled"></div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-youtube"
+                      class="bi bi-facebook"
                       viewBox="0 0 16 16"
                       xml:space="preserve"
                     >
                       <path
-                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0Zm2.7 4.62H9.802c-.463 0-.982.62-.982 1.098v1.3h1.8l-.24 1.86H8.82v4.86H6.87V8.878H5V7.02h1.87v-1.3c0-1.54 1.07-2.8 2.558-2.8h1.272v1.7h-.001Z"
                         fill="currentColor"
                       ></path>
                     </svg>
                   </a>
-                  <div class="tooltip">Youtube</div>
+                  <div class="tooltip">Facebook</div>
                 </li>
               </ul>
-              
         </div>
-        
-    </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const title = localStorage.getItem('postTitle');
-    const content = localStorage.getItem('postContent');
-
-    if (title && content) {
-        const totalPostDiv = document.getElementById('totalPost');
-        totalPostDiv.innerHTML = `
-            <h3>${title}</h3>
-            <p>${content}</p>
-        `;
-
-        localStorage.removeItem('postTitle');
-        localStorage.removeItem('postContent');
-    }
-    });
-
-    let c = 0;
-    let isLiked = false;
-
-    function addLike(postId) {
-        fetch(`/addlike?postId=${postId}`, { method: 'POST' })
-          .then(response => {
-            if (response.ok) {
-              console.log(`Post ${postId} liked successfully.`);
-            } else {
-              console.error(`Failed to like post ${postId}.`);
-            }
-          })
-          .catch(error => console.error(`Error liking post ${postId}:`, error));
-      }
-
-    
-    function adddislike(){
-      const doadislike = document.getElementById('dislike');
-      if (doadislike.checked === true) {
-         Likes = Likes - 1;
-      }
-    }
-    function monunlike(){
-      c = "0"
-      document.getElementById('c').innerHTML = c;
-           
-    }
-
-    function addLike(postId) {
-      fetch('/addlike?postId=' + postId)
-      .then(response => response.json())
-      .then(data => {
-        const likeButton = document.querySelector(`button[data-post-id="${postId}"]`);
-        likeButton.textContent = `Like (${data.likesCount})`;
-      })
-      .catch(error => console.error('Error:', error));
-    }
-
-
-
-    </script>
+    </footer>
 </body>
 </html>
