@@ -45,16 +45,26 @@
     <main class="container">
         <section id="post-number"></section>
         <aside class="subcontainer3">
-          <h3>Les Catégories:</h3>
+          <h3>Rechercher:</h3>
           <form id="form"> 
             <input type="search" id="query" name="q" placeholder="Search...">
             <button>Search</button>
           </form>
-          <ul>
-            {{range.}}
-            <li><a href="/category/{{.Category}}">{{.Category}}</a></li>
-            {{end}}
-          </ul> 
+          <div class="dropdown" id="categoryDropdown">
+            <h3>Les Catégories des Posts:</h3>
+            <div class="dropdown-content">
+              <a id='category1' href="#" onclick="selectCategory('Category 1')">Général</a>
+              <a id='category2' href="#" onclick="selectCategory('Category 2')">Politique</a>
+              <a id='category3'href="#" onclick="selectCategory('Category 3')">Cinéma</a>
+              <a id='category4' href="#" onclick="selectCategory('Category 4')">Sport</a>
+              <a id='category5' href="#" onclick="selectCategory('Category 5')">Musique</a>
+              <a id='category6' href="#" onclick="selectCategory('Category 6')">Jeux Vidéo</a>
+              <a id='category7' href="#" onclick="selectCategory('Category 7')">Littérature</a>
+              <a id='category8' href="#" onclick="selectCategory('Category 8')">Jeux</a>
+              <a id='category9' href="#" onclick="selectCategory('Category 9')">Manga</a>
+              <a id='category10' href="#" onclick="selectCategory('Category 10')">Cuisine</a>
+            </div>            
+          </div>
         </aside>
 
         <section class="subcontainer2">
@@ -188,5 +198,11 @@
               </ul>
         </div>
     </footer>
+    <script>
+      function selectCategory(category) {
+        alert("Category selected: " + category);
+        
+      }
+    </script>
 </body>
 </html>

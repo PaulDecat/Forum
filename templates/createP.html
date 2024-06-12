@@ -47,7 +47,19 @@
               <form id="post-content" action="/submitpost" method="post">
                   <input type="text" name="title" id="postitle" placeholder="Titre du Post" required>
                   <br>
-                  <input type="text" name="category" id="postcategory" placeholder="Categorie" required>
+                  <select id="category" name="category" required>
+                    <option value="Général">Général</option>
+                    <option value="Politique">Politique</option>
+                    <option value="Cinéma">Cinéma</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Musique">Musique</option>
+                    <option value="Jeux Vidéo">Jeux Vidéo</option>
+                    <option value="Littérature">Littérature</option>
+                    <option value="Jeux">Jeux</option>
+                    <option value="Manga">Manga</option>
+                    <option value="Cuisine">Cuisine</option>
+                </select>
+
                   <br>
                   <textarea name="content" id="postext" placeholder="Contenu du Post" required></textarea>
                   <br>

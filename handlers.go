@@ -68,8 +68,9 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 		title := r.FormValue("title")
 		content := r.FormValue("content")
 		userID := 1 // Pour test
+		category := r.FormValue("category")
 
-		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, "General")
+		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, category)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

@@ -145,6 +145,32 @@ nav  a:hover{ /* tous liens lors du survol dans la balise nav */
     padding-top: 1px;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 16px;
+  width:90px;
+  text-decoration: none;
+  display: block;
+   background-color: #c6cbcf;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 .subcontainer3 {
     background-color: #f0f0f0cd;
     color: black;
