@@ -131,7 +131,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		setSessionCookie(w, sessionID)
 		saveSession(sessionID, userID)
 
-		log.Printf("\x1b[34mUser logged in: UserID: %d, Email: %s, Hashed Password: %s\x1b[0m\n", userID, email, hashedPassword)
+		log.Printf("\x1b[32mUser logged in: UserID: %d, Email: %s, Hashed Password: %s\x1b[0m\n", userID, email, hashedPassword)
 
 		http.Redirect(w, r, "/index", http.StatusSeeOther)
 		return
@@ -147,8 +147,23 @@ func logoutHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	userID, err := getUserIDFromSession(sessionID)
+	if err != nil {
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+		return
+	}
+
+	var username string
+	err = db.QueryRow("SELECT Username FROM User WHERE ID = ?", userID).Scan(&username)
+	if err != nil {
+		return
+	}
+
 	removeSession(sessionID)
 	clearSessionCookie(w)
+
+	log.Printf("\x1b[32mDéconnexion du compte: UserID: %d, Username: %s\x1b[0m\n", userID, username)
+
 	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
 
