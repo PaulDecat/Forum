@@ -31,23 +31,26 @@
     </div>
     
     <div class="precision">
-        <h2>Connexion</h2>
-        <p>Connectez-vous pour accéder à votre compte.</p>
-    </div>
-    <br>
-    <div class="form-box">
-    <form action="/login" method="post">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Connexion</button>
-    </form>
-    <div class="form-section">
+      <h2>Connexion</h2>
+      <p>Connectez-vous pour accéder à votre compte.</p>
+  </div>
+  <br>
+  <div class="form-box">
+      {{if .ErrorMessage}}
+          <div class="error-message" style="color:red;">{{.ErrorMessage}}</div>
+      {{end}}
+      <form action="/login" method="post">
+          <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+              <label for="password">Mot de passe:</label>
+              <input type="password" id="password" name="password" required>
+          </div>
+          <button type="submit">Connexion</button>
+      </form>
+  <div class="form-section">
         <p>Vous n'avez pas encore de compte? <a href="/signup">En créer un</a> </p>
       </div>
       <br>

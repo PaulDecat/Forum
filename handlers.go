@@ -112,13 +112,13 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		err := db.QueryRow("SELECT ID, Password FROM User WHERE Email = ?", email).Scan(&userID, &hashedPassword)
 		if err != nil {
 			log.Printf("\x1b[31mError querying database: %v\x1b[0m\n", err)
-			http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+			renderLoginTemplate(w, "Informations erronnées, veuillez réessayer")
 			return
 		}
 
 		checkResult := checkPasswordHash(password, hashedPassword)
 		if !checkResult.Success {
-			http.Error(w, checkResult.Message, http.StatusUnauthorized)
+			renderLoginTemplate(w, "Informations erronnées, veuillez réessayer")
 			return
 		}
 
@@ -137,7 +137,26 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.ServeFile(w, r, "./templates/login.html")
+	renderLoginTemplate(w, "")
+}
+
+func renderLoginTemplate(w http.ResponseWriter, errorMessage string) {
+	tmpl, err := template.ParseFiles("./templates/login.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	data := struct {
+		ErrorMessage string
+	}{
+		ErrorMessage: errorMessage,
+	}
+
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func logoutHandler(w http.ResponseWriter, r *http.Request) {
