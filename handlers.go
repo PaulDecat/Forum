@@ -15,13 +15,28 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	isLoggedIn := false
+
+	sessionID, err := getSessionID(r)
+	if err == nil {
+		_, err := getUserIDFromSession(sessionID)
+		if err == nil {
+			isLoggedIn = true
+		}
+	}
+
+	data := PageData{
+		Posts:      posts,
+		IsLoggedIn: isLoggedIn,
+	}
+
 	tmpl, err := template.ParseFiles("./templates/index.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	err = tmpl.Execute(w, posts)
+	err = tmpl.Execute(w, data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

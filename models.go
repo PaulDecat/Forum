@@ -15,3 +15,8 @@ type Post struct {
 	Category string
 	Likes    int
 }
+
+type PageData struct {
+	Posts      []Post
+	IsLoggedIn bool
+}

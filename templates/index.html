@@ -36,8 +36,8 @@
         <nav>
             <a href="/index">Accueil</a> 
             <a href="/createP">Créer un Post</a>
-            <a href="/mypage">Votre Profil</a>
-            <a href="/signup">Se connecter</a>
+            <a href="/mypage">Mon Profil</a>
+            <a href="{{ if .IsLoggedIn }} /logout {{ else }} /login {{ end }}"> {{ if .IsLoggedIn }} Se déconnecter {{ else }} Se connecter {{ end }}</a>
             <a href="/parameters">Parametres</a>
         </nav>
         
@@ -48,7 +48,7 @@
         <div class="subcontainer2">
             <h3>Les Post:</h3>
             <div class="totalPost" id="totalPost">
-              {{range .}}
+              {{range .Posts}}
     <div class="post">
         <h2>{{.Title}}</h2>
         <p>{{.Content}}</p>
