@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// Initialisation de la base de données
 	var err error
 	db, err = initDB("./data.db")
 	if err != nil {
@@ -15,8 +16,10 @@ func main() {
 	}
 	defer db.Close()
 
+	// Gestionnaire de fichiers statiques
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
+	// Gestionnaires de routes
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/signup", signUpHandler)
 	http.HandleFunc("/login", loginHandler)
@@ -27,6 +30,7 @@ func main() {
 	http.HandleFunc("/mypage", mypageHandler)
 	http.HandleFunc("/parameters", parametersHandler)
 
-	log.Println("Starting server at http://localhost:8080")
+	// Démarrage du serveur
+	log.Println("\x1b[33mStarting server at http://localhost:8080\x1b[0m")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -46,17 +46,17 @@ func createTables(db *sql.DB) error {
 
 	_, err := db.Exec(createUserTable)
 	if err != nil {
-		log.Printf("Error creating User table: %v", err)
+		log.Printf("\x1b[31mError creating User table: %v\x1b[0m", err)
 		return err
 	}
-	log.Println("User table created successfully or already exists")
+	log.Println("\x1b[33mUser table created successfully or already exists\x1b[0m")
 
 	_, err = db.Exec(createPostTable)
 	if err != nil {
-		log.Printf("Error creating Post table: %v", err)
+		log.Printf("\x1b[31mError creating Post table: %v\x1b[0m", err)
 		return err
 	}
-	log.Println("Post table created successfully or already exists")
+	log.Println("\x1b[33mPost table created successfully or already exists\x1b[0m")
 
 	return nil
 }
