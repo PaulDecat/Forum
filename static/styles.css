@@ -90,10 +90,24 @@ nav  a{ /* tous les liens a à l'intérieur de la balise nav */
   
 }
 
-nav  a:hover{ /* tous liens lors du survol dans la balise nav */
-background: #f43c80; /* couleur de fond */
+nav  b{ /* tous les liens a à l'intérieur de la balise nav */
+float: left; /* effet flottant */
+text-decoration: none; /* pas d'héritage avec effet souligné */
+color: black; /* couleur du texte */
+background: transparent; /* couleur de fond */
+height: 36px; /* hauteur */
+line-height: 33px; /* interligne */
+padding: 0 10px; /* marges intérieur */
+font-family: sans-serif; /* police d'écriture */
+font-size: 13px; /* taille du texte */
+transition: .5s; /* temps de transition lors du hover : une demi seconde */
+border-radius: 20px;
+
 }
 
+  nav  a:hover{ /* tous liens lors du survol dans la balise nav */
+  background: #f43c80; /* couleur de fond */
+  }
 .precision {
 background-color: #f0f0f0cd;
 color: black;
@@ -137,7 +151,7 @@ transition: width 2s;
   background-color: #f0f0f0cd;
   color: black;
   border-radius: 20px;
-  height: auto;
+  height: 500px;
   width: 925px;
   margin-left: auto;
   margin-right: auto;
@@ -483,25 +497,4 @@ ul {
   100% {
     transform: translateY(0px) rotate(-45deg);
   }
-}
-
-/*Search bar*/
-
-.searchbar {
-width: 100%;
-display: flex;
-justify-content: left;
-align-items: right;
-}
-
-.fas-fa-search {
-width: 30px;
-height: 15px;
-display: flex;
-justify-content: center;
-align-items: center;
-border-radius: 50%;
-color: #4d4d4d;
-background-color: #fff;
-transition: all 0.3s ease-in-out;
 }
