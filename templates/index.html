@@ -68,28 +68,52 @@
         </aside>
 
         <section class="subcontainer2">
-            <h3>Les Posts:</h3>
-            <div class="totalPost" id="totalPost">
-              {{range .}}
-              <article class="post">
-                  <h2>{{.Title}}</h2>
-                  <p>{{.Content}}</p>
-                  <p>Catégories: {{.Category}}</p>
-                  <p>Appréciation: {{.Likes}}</p>
-                  <div>
-                    <form action="/addlike">
-                      <input type="hidden" name="Like" value="{{.ID}}">
-                      <button type="submit">Like</button>
-                    </form>
-                    <form action="/adddislike">
-                      <input type="hidden" name="Dislike" value="{{.ID}}">
-                      <button type="submit">Dislike</button>
-                    </form>        
-                  </div>
-              </article>
-              {{end}}
-            </div>
-        </section>
+          <h3>Les Posts:</h3>
+          <div class="totalPost" id="totalPost">
+            {{range .}}
+            <article class="post">
+                <h2>{{.Title}}</h2>
+                <p>{{.Content}}</p>
+                <p>Catégories: {{.Category}}</p>
+                <p>Appréciation: {{.Likes}}</p>
+                <div>
+                  <form action="/addlike">
+                    <input type="hidden" name="Like" value="{{.ID}}">
+                    <button type="submit">Like</button>
+                  </form>
+                  <form action="/adddislike">
+                    <input type="hidden" name="Dislike" value="{{.ID}}">
+                    <button type="submit">Dislike</button>
+                  </form>        
+                </div>
+                <div>
+                  <form action="/editpost" method="get" style="display:inline;">
+                    <input type="hidden" name="postID" value="{{.ID}}">
+                    <button type="submit">Edit</button>
+                  </form>
+                  <form action="/deletepost" method="post" style="display:inline;">
+                    <input type="hidden" name="postID" value="{{.ID}}">
+                    <button type="submit">Delete</button>
+                  </form>
+                </div>
+                <form action="/addcommentary" method="post">
+                  <textarea name="comments" id="postcomment" placeholder="Réagir avec un Commentaire" required></textarea>
+                  <input type="hidden" name="postID" value="{{.ID}}">
+                  <input class="mybutton5" type="submit" value="Envoyer le commentaire"/>
+              </form>
+              <div class="comments-section">
+                <h4>Commentaires:</h4>
+                {{range .Comments}}
+                <p>{{.Comment}}</p>
+                {{end}}
+              </div>
+              
+            </article>
+            {{end}}
+          </div>
+      </section>
+      
+      
     </main>
     <br>
     <footer class="footer">

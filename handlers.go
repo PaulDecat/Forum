@@ -50,10 +50,40 @@ func getAllPosts() ([]Post, error) {
 		if err != nil {
 			return nil, err
 		}
+
+		// Récupère les commentaires pour chaque post
+		comments, err := getCommentsByPostID(post.ID)
+		if err != nil {
+			return nil, err
+		}
+
+		post.Comments = comments
+
 		posts = append(posts, post)
 	}
 
 	return posts, nil
+}
+
+func getCommentsByPostID(postID int) ([]Comment, error) {
+	var comments []Comment
+
+	rows, err := db.Query("SELECT ID, Comments, PostID FROM Comment WHERE PostID = ?", postID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var comment Comment
+		err := rows.Scan(&comment.ID, &comment.Comments, &comment.PostID)
+		if err != nil {
+			return nil, err
+		}
+		comments = append(comments, comment)
+	}
+
+	return comments, nil
 }
 
 func signUpHandler(w http.ResponseWriter, r *http.Request) {
@@ -70,7 +100,7 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 		userID := 1 // Pour test
 		category := r.FormValue("category")
 
-		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, category)
+		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, category, 0, 0)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -99,11 +129,12 @@ func submitUserHandler(w http.ResponseWriter, r *http.Request) {
 func submitPostHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		title := r.FormValue("title")
+
 		category := r.FormValue("category")
 		content := r.FormValue("content")
 		userID := 1 // Pour test
 
-		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, category)
+		_, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, category, 0, 0)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -149,4 +180,24 @@ func handleAddDislike(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	updateDislikes(w, r, db, postID)
+}
+
+func submitComment(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		comment := r.FormValue("comments")
+		postIDStr := r.FormValue("postID")
+		postID, err := strconv.Atoi(postIDStr)
+		if err != nil {
+			http.Error(w, "Invalid post ID", http.StatusBadRequest)
+			return
+		}
+
+		_, err = db.Exec("INSERT INTO Comment (Comments, PostID) VALUES (?, ?)", comment, postID)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		http.Redirect(w, r, "/index", http.StatusSeeOther)
+	}
 }

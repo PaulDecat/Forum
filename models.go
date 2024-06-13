@@ -15,4 +15,11 @@ type Post struct {
 	Category string
 	Likes    int
 	Dislikes int
+	Comments []Comment
+}
+
+type Comment struct {
+	ID       int
+	Comments string
+	PostID   int
 }

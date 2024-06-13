@@ -42,8 +42,16 @@ func createTables(db *sql.DB) error {
         Content TEXT,
         UserID INTEGER,
         Likes INTEGER,
-		Dislikes INTEGER,
+        Dislikes INTEGER,
         FOREIGN KEY(UserID) REFERENCES User(ID)
+    );`
+
+	createCommentTable := `
+    CREATE TABLE IF NOT EXISTS Comment (
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        PostID INTEGER,
+        Comments TEXT,
+        FOREIGN KEY(PostID) REFERENCES Post(ID)
     );`
 
 	_, err := db.Exec(createUserTable)
@@ -60,14 +68,19 @@ func createTables(db *sql.DB) error {
 	}
 	log.Println("Post table created successfully or already exists")
 
+	_, err = db.Exec(createCommentTable)
+	if err != nil {
+		log.Printf("Error creating Post table: %v", err)
+		return err
+	}
+	log.Println("Comment table created successfully or already exists")
+
 	return nil
 }
 
 func updateLikes(w http.ResponseWriter, r *http.Request, db *sql.DB, postID int) {
 	updateMyLikes := `UPDATE Post SET Likes = Likes + 1 WHERE ID =?;`
 	_, err := db.Exec(updateMyLikes, postID)
-
-	println("dffsdfsd")
 
 	if err != nil {
 		log.Printf("Error updating likes for post ID %d: %v", postID, err)
