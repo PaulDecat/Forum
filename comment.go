@@ -24,30 +24,19 @@ func (c *Comment) CreateComment() error {
 	return nil
 }
 
-func (c *Comment) UpdateComment() {
-        result, err := db.Exec("UPDATE Comment SET Content = ? WHERE ID = ?", c.Content, c.ID)
-        if err != nil {
-            fmt.Println("Erreur lors de la mise à jour du commentaire:", err)
-            return
-        }
-    
-        rowsAffected, err := result.RowsAffected()
-        if err != nil {
-            fmt.Println("Erreur lors de la récupération des lignes affectées:", err)
-            return
-        }
-    
-        if rowsAffected == 0 {
-            fmt.Println("Aucun commentaire trouvé avec cet ID pour la mise à jour")
-            return
-        }
-        fmt.Println("Commentaire mis à jour avec succès :", c)
-    }
-
-func (c *Comment) DeleteComment() {
+func (c *Comment) UpdateComment() error {
+	_, err := db.Exec("UPDATE Comment SET Content = ? WHERE ID = ?", c.Content, c.ID)
+	if err != nil {
+		return err
+	}
+       fmt.Println("Commentaire mis à jour avec succès:", c)
+	return nil
+}
+func (c *Comment) DeleteComment() error {
 	_, err := db.Exec("DELETE FROM Comment WHERE ID = ?", c.ID)
 	if err != nil {
-		fmt.Println("Erreur lors de la suppression du commentaire:", err)
-		return
-    }
+		return err
+	}
+	fmt.Println("Commentaire supprimé avec succès:", c)
+	return nil
 }
