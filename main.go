@@ -32,5 +32,7 @@ func main() {
 
 	// Démarrage du serveur
 	log.Println("\x1b[33mStarting server at http://localhost:8080\x1b[0m")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Println("Erreur:", err)
+	}
 }
