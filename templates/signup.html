@@ -39,6 +39,9 @@
             <span class="form-title">Sign up</span>
             <span class="form-subtitle">Create a free account with your email.</span>
             <div class="form-container">
+              {{if .ErrorMessage}}
+          <div class="error-message" style="color:red;">{{.ErrorMessage}}</div>
+      {{end}}
                 <input type="text" class="input" name="username" placeholder="Username" required>
                 <input type="email" class="input" name="email" placeholder="Email" required>
                 <input type="password" class="input" name="password" placeholder="Password" required>

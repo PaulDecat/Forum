@@ -93,6 +93,14 @@ func signUpHandler(w http.ResponseWriter, r *http.Request) {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 
+		// Vérifiez si l'email existe déjà dans la base de données
+		var existingEmail string
+		err := db.QueryRow("SELECT Email FROM User WHERE Email = ?", email).Scan(&existingEmail)
+		if err == nil && existingEmail != "" {
+			renderSignUpTemplate(w, "Un compte avec cet email existe déjà. Veuillez utiliser une autre adresse email.")
+			return
+		}
+
 		hashedPassword, err := hashPassword(password)
 		if err != nil {
 			http.Error(w, "Could not hash password", http.StatusInternalServerError)
@@ -111,7 +119,26 @@ func signUpHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.ServeFile(w, r, "./templates/signup.html")
+	renderSignUpTemplate(w, "")
+}
+
+func renderSignUpTemplate(w http.ResponseWriter, errorMessage string) {
+	tmpl, err := template.ParseFiles("./templates/signup.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	data := struct {
+		ErrorMessage string
+	}{
+		ErrorMessage: errorMessage,
+	}
+
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
