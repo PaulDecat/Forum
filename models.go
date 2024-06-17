@@ -20,3 +20,8 @@ type PageData struct {
 	Posts      []Post
 	IsLoggedIn bool
 }
+
+type PasswordCheckResult struct {
+	Success bool
+	Message string
+}

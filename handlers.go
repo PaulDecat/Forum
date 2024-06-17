@@ -247,8 +247,9 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 	} else if r.Method == http.MethodPost {
 		title := r.FormValue("title")
 		content := r.FormValue("content")
+		category := r.FormValue("category")
 
-		result, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes) VALUES (?, ?, ?, ?, 0)", title, content, userID, "General")
+		result, err := db.Exec("INSERT INTO Post (Title, Content, UserID, Category, Likes, Dislikes) VALUES (?, ?, ?, ?, 0, 0)", title, content, userID, category, 0, 0)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -269,32 +270,43 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 func mypageHandler(w http.ResponseWriter, r *http.Request) {
 	// Vérifiez si la méthode est POST
 	if r.Method == http.MethodPost {
-		sessionID, err := getSessionID(r)
-		if err != nil {
+		if r.FormValue("action") == "delete" {
+			sessionID, err := getSessionID(r)
+			if err != nil {
+				http.Redirect(w, r, "/login", http.StatusSeeOther)
+				return
+			}
+
+			userID, err := getUserIDFromSession(sessionID)
+			if err != nil {
+				http.Redirect(w, r, "/login", http.StatusSeeOther)
+				return
+			}
+
+			var username string
+			err = db.QueryRow("SELECT Username FROM User WHERE ID = ?", userID).Scan(&username)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			_, err = db.Exec("DELETE FROM User WHERE ID = ?", userID)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			log.Printf("\x1b[31mAccount deleted: UserID: %d, Username: %s\x1b[0m\n", userID, username)
+
+			removeSession(sessionID)
+			clearSessionCookie(w)
+
 			http.Redirect(w, r, "/login", http.StatusSeeOther)
 			return
 		}
-
-		userID, err := getUserIDFromSession(sessionID)
-		if err != nil {
-			http.Redirect(w, r, "/login", http.StatusSeeOther)
-			return
-		}
-
-		_, err = db.Exec("DELETE FROM User WHERE ID = ?", userID)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		removeSession(sessionID)
-		clearSessionCookie(w)
-
-		http.Redirect(w, r, "/login", http.StatusSeeOther)
-		return
 	}
 
-	// Si la méthode est GET, affichez la page du profil
+	// Si la méthode est GET, affichez la page du profil comme prévu
 	sessionID, err := getSessionID(r)
 	if err != nil {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
@@ -325,8 +337,6 @@ func mypageHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	log.Printf("\x1b[31mAccount deleted: UserID: %d, Username: %s\x1b[0m\n", userID, username)
 
 	tmpl.Execute(w, data)
 }

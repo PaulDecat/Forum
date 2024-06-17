@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/styles.css">
     <title>Les 3 Mousquetaires</title>
 </head>
 <body>
@@ -44,11 +44,11 @@
           {{if .ErrorMessage}}
       <div class="error-message" style="color:red;">{{.ErrorMessage}}</div>
   {{end}}
-                <input type="text" class="input" placeholder="Username">
-                <br>
-                <input type="email" class="input" placeholder="Email">
-                <br>
-                <input type="password" class="input" placeholder="Password">
+  <input type="text" class="input" name="username" placeholder="Username" required>
+  <br>
+  <input type="email" class="input" name="email" placeholder="Email" required>
+  <br>
+  <input type="password" class="input" name="password" placeholder="Password" required>
             </div>
             <button type="submit">S'inscrire</button>
         </form>

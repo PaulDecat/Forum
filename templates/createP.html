@@ -41,22 +41,35 @@
             <a href="/parameters">Parametres</a>
         </nav>
     </div>
-    <div class="creatingform">
+    <main class="creatingform">
         <h3>Création de Post:</h3>
         <div class="creatingmypost">
             <h3>Veuillez donner un titre et un texte à votre Post:</h3>
             <h5><i>Attention! Tout texte pouvant heurter la sensibilité d'un utilisateur entrainera une suspension de compte!</i></h5>
             <form id="post-content" action="/createP" method="post">
-                <input type="text" name="title" id="postitle" placeholder="Titre du Post" required>
-                <br>
+              <input type="text" name="title" id="postitle" placeholder="Titre du Post" required>
+              <br>
+              <select id="category" name="category" required>
+                <option value="Général">Général</option>
+                <option value="Politique">Politique</option>
+                <option value="Cinéma">Cinéma</option>
+                <option value="Sport">Sport</option>
+                <option value="Musique">Musique</option>
+                <option value="Jeux Vidéo">Jeux Vidéo</option>
+                <option value="Littérature">Littérature</option>
+                <option value="Jeux">Jeux</option>
+                <option value="Manga">Manga</option>
+                <option value="Cuisine">Cuisine</option>
+              </select>
+              <br>
                 <textarea name="content" id="postext" placeholder="Contenu du Post" required></textarea>
                 <br>
                 <input class="mybutton4" type="submit" value="Créer mon Post"/>
             </form>
         </div>
-    </div>
+      </main>
     <br>
-    <div class ="footer">
+    <footer class ="footer">
       <div class="droits">
           <nav>
               <a href="/terms">Conditions générales d'utilisation</a> 
@@ -96,6 +109,6 @@
               </li>
             </ul>
       </div>
-  </div>
-</body>
+    </footer>
+  </body>
 </html>

@@ -5,7 +5,6 @@ import (
 	"log"
 
 	_ "github.com/mattn/go-sqlite3"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var db *sql.DB
@@ -41,7 +40,16 @@ func createTables(db *sql.DB) error {
         Content TEXT,
         UserID INTEGER,
         Likes INTEGER,
+        Dislikes INTEGER,
         FOREIGN KEY(UserID) REFERENCES User(ID)
+    );`
+
+	createCommentTable := `
+    CREATE TABLE IF NOT EXISTS Comment (
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        PostID INTEGER,
+        Comments TEXT,
+        FOREIGN KEY(PostID) REFERENCES Post(ID)
     );`
 
 	_, err := db.Exec(createUserTable)
@@ -58,29 +66,12 @@ func createTables(db *sql.DB) error {
 	}
 	log.Println("\x1b[33mPost table created successfully or already exists\x1b[0m")
 
-	return nil
-}
-
-func hashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-type PasswordCheckResult struct {
-	Success bool
-	Message string
-}
-
-func checkPasswordHash(password, hash string) PasswordCheckResult {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	_, err = db.Exec(createCommentTable)
 	if err != nil {
-		return PasswordCheckResult{
-			Success: false,
-			Message: "Invalid password",
-		}
+		log.Printf("\x1b[31Error creating Post table: %v\x1b[0m", err)
+		return err
 	}
-	return PasswordCheckResult{
-		Success: true,
-		Message: "Password is correct",
-	}
+	log.Println("\x1b[33mComment table created successfully or already exists\x1b[0m")
+
+	return nil
 }
