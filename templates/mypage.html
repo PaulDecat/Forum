@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="../static/style.css">
     <title>Votre Profil</title>
 </head>
 <body>
@@ -50,7 +50,7 @@
             <div class="myprofil-mdp" id="myprofil-mdp">
                 <p><strong>Votre Mot de Passe:</strong></p>
             </div>
-            <form method="POST" action="/delete-account" onsubmit="return confirm('Voulez-vous vraiment supprimer votre compte ?');">
+            <form method="POST" action="/mypage" onsubmit="return confirm('Voulez-vous vraiment supprimer votre compte ?');">
                 <input type="hidden" name="action" value="delete">
                 <button type="submit" class="delete-button">Supprimer mon compte</button>
             </form>
