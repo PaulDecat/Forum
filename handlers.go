@@ -77,6 +77,7 @@ func getAllPosts() ([]Post, error) {
 	return posts, nil
 }
 
+// Récupérer tous les commentaires depuis la db
 func getCommentsByPostID(postID int) ([]Comment, error) {
 	var comments []Comment
 
@@ -126,7 +127,6 @@ func signUpHandler(w http.ResponseWriter, r *http.Request) {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 
-		// Vérifier si l'email existe déjà dans la base de données
 		var existingEmail string
 		err := db.QueryRow("SELECT Email FROM User WHERE Email = ?", email).Scan(&existingEmail)
 		if err == nil && existingEmail != "" {
@@ -155,6 +155,7 @@ func signUpHandler(w http.ResponseWriter, r *http.Request) {
 	renderSignUpTemplate(w, "")
 }
 
+// Rendre le template d'inscription avec un message si erreur
 func renderSignUpTemplate(w http.ResponseWriter, errorMessage string) {
 	tmpl, err := template.ParseFiles("./templates/signup.html")
 	if err != nil {
@@ -174,6 +175,7 @@ func renderSignUpTemplate(w http.ResponseWriter, errorMessage string) {
 	}
 }
 
+// Rendre le template de connexion avec un message si erreur
 func renderLoginTemplate(w http.ResponseWriter, errorMessage string) {
 	tmpl, err := template.ParseFiles("./templates/login.html")
 	if err != nil {
@@ -216,6 +218,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// Génèrer un ID de session et enregistre la session
 		sessionID, err := generateSessionID()
 		if err != nil {
 			http.Error(w, "Could not create session", http.StatusInternalServerError)
@@ -301,7 +304,6 @@ func createPostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func mypageHandler(w http.ResponseWriter, r *http.Request) {
-	// Vérifiez si la méthode est POST
 	if r.Method == http.MethodPost {
 		if r.FormValue("action") == "delete" {
 			sessionID, err := getSessionID(r)
@@ -339,7 +341,6 @@ func mypageHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Si la méthode est GET, affichez la page du profil comme prévu
 	sessionID, err := getSessionID(r)
 	if err != nil {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)

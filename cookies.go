@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// Fonction pour générer un ID de session sécurisé
+// Générer un ID de session sécurisé
 func generateSessionID() (string, error) {
 	b := make([]byte, 32)
 	_, err := rand.Read(b)
@@ -18,18 +18,18 @@ func generateSessionID() (string, error) {
 	return base64.URLEncoding.EncodeToString(b), nil
 }
 
-// Fonction pour définir un cookie de session
+// Définir un cookie de session
 func setSessionCookie(w http.ResponseWriter, sessionID string) {
 	http.SetCookie(w, &http.Cookie{
 		Name:     "session_id",
 		Value:    sessionID,
 		Path:     "/",
 		HttpOnly: true,
-		Expires:  time.Now().Add(1 * time.Hour),
+		Expires:  time.Now().Add(1 * time.Hour), // Date d'expiration du cookie (1 heure)
 	})
 }
 
-// Fonction pour récupérer l'ID de session à partir d'un cookie
+// Récupérer l'ID de session à partir d'un cookie
 func getSessionID(r *http.Request) (string, error) {
 	cookie, err := r.Cookie("session_id")
 	if err != nil {
@@ -38,24 +38,26 @@ func getSessionID(r *http.Request) (string, error) {
 	return cookie.Value, nil
 }
 
-// Fonction pour supprimer un cookie de session
+// Supprimer un cookie de session
 func clearSessionCookie(w http.ResponseWriter) {
 	http.SetCookie(w, &http.Cookie{
-		Name:     "session_id",
-		Value:    "",
-		Path:     "/",
-		HttpOnly: true,
-		MaxAge:   -1,
+		Name:     "session_id", // Nom du cookie
+		Value:    "",           // Valeur vide pour effacer le cookie
+		Path:     "/",          // Chemin pour lequel le cookie est valide
+		HttpOnly: true,         // Empêche l'accès au cookie via JavaScript (sécurité)
+		MaxAge:   -1,           // MaxAge négatif pour indiquer que le cookie est expiré
 	})
 }
 
-// Fonction pour enregistrer l'ID de session et l'ID utilisateur en mémoire
+// variable sessions en mémoire
 var sessionStore = map[string]int{}
 
+// Enregistrer l'ID de session & l'ID utilisateur ( login )
 func saveSession(sessionID string, userID int) {
 	sessionStore[sessionID] = userID
 }
 
+// Obtenir l'ID utilisateur à partir de l'ID de session
 func getUserIDFromSession(sessionID string) (int, error) {
 	userID, exists := sessionStore[sessionID]
 	if !exists {
@@ -64,6 +66,7 @@ func getUserIDFromSession(sessionID string) (int, error) {
 	return userID, nil
 }
 
+// Supprimer une session de la mémoire( déconnexion )
 func removeSession(sessionID string) {
 	delete(sessionStore, sessionID)
 }
