@@ -39,6 +39,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 	err = tmpl.Execute(w, data)
 	if err != nil {
+		log.Printf("Template execution error: %v", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -46,16 +47,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 // Récupérer tous les posts depuis la db
 func getAllPosts() ([]Post, error) {
-	var posts []Post
-
-	// Exécute une requête SQL pour récupérer tous les posts
 	rows, err := db.Query("SELECT ID, Title, Content, UserID, Category, Likes FROM Post")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	// Parcourt les lignes résultantes et ajoute les posts à la liste
+	var posts []Post
 	for rows.Next() {
 		var post Post
 		err := rows.Scan(&post.ID, &post.Title, &post.Content, &post.UserID, &post.Category, &post.Likes)
@@ -63,15 +61,17 @@ func getAllPosts() ([]Post, error) {
 			return nil, err
 		}
 
-		// Récupère les commentaires pour chaque post
 		comments, err := getCommentsByPostID(post.ID)
 		if err != nil {
 			return nil, err
 		}
 
 		post.Comments = comments
-
 		posts = append(posts, post)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
 	}
 
 	return posts, nil
