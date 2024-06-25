@@ -14,6 +14,14 @@ type Post struct {
 	UserID   int
 	Category string
 	Likes    int
+	Dislikes int
+	Comments []Comment
+}
+
+type Comment struct {
+	ID       int
+	Comments string
+	PostID   int
 }
 
 type PageData struct {

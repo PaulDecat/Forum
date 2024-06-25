@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -351,4 +352,46 @@ func rgpdHandler(w http.ResponseWriter, r *http.Request) {
 
 func parametersHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./templates/parameters.html")
+}
+
+func handleAddLike(w http.ResponseWriter, r *http.Request) {
+	postIDStr := r.FormValue("Like")
+	postID, err := strconv.Atoi(postIDStr)
+	log.Println(err)
+	if err != nil {
+		http.Error(w, "Invalid post ID", http.StatusBadRequest)
+		return
+	}
+	updateLikes(w, r, db, postID)
+	w.WriteHeader(http.StatusOK)
+}
+
+func handleAddDislike(w http.ResponseWriter, r *http.Request) {
+	postIDStr := r.FormValue("Dislike")
+	postID, err := strconv.Atoi(postIDStr)
+	if err != nil {
+		http.Error(w, "Invalid post ID", http.StatusBadRequest)
+		return
+	}
+	updateDislikes(w, r, db, postID)
+}
+
+func submitComment(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		comment := r.FormValue("comments")
+		postIDStr := r.FormValue("postID")
+		postID, err := strconv.Atoi(postIDStr)
+		if err != nil {
+			http.Error(w, "Invalid post ID", http.StatusBadRequest)
+			return
+		}
+
+		_, err = db.Exec("INSERT INTO Comment (Comments, PostID) VALUES (?, ?)", comment, postID)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		http.Redirect(w, r, "/index", http.StatusSeeOther)
+	}
 }

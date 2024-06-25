@@ -22,11 +22,14 @@ func main() {
 	// Gestionnaires de routes
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/signup", signUpHandler)
-	http.HandleFunc("/login", loginHandler)
-	http.HandleFunc("/logout", logoutHandler)
 	http.HandleFunc("/createP", createPostHandler)
 	http.HandleFunc("/terms", termsHandler)
 	http.HandleFunc("/rgpd", rgpdHandler)
+	http.HandleFunc("/addlike", handleAddLike)
+	http.HandleFunc("/adddislike", handleAddDislike)
+	http.HandleFunc("/deletepost", deletePostHandler)
+	http.HandleFunc("editpost", editPostHandler)
+	http.HandleFunc("/submitcom", submitComment)
 	http.HandleFunc("/mypage", mypageHandler)
 	http.HandleFunc("/parameters", parametersHandler)
 
