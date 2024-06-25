@@ -174,6 +174,25 @@ func renderSignUpTemplate(w http.ResponseWriter, errorMessage string) {
 	}
 }
 
+func renderLoginTemplate(w http.ResponseWriter, errorMessage string) {
+	tmpl, err := template.ParseFiles("./templates/login.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	data := struct {
+		ErrorMessage string
+	}{
+		ErrorMessage: errorMessage,
+	}
+
+	err = tmpl.Execute(w, data)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		email := r.FormValue("email")
@@ -213,25 +232,6 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	renderLoginTemplate(w, "")
-}
-
-func renderLoginTemplate(w http.ResponseWriter, errorMessage string) {
-	tmpl, err := template.ParseFiles("./templates/login.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	data := struct {
-		ErrorMessage string
-	}{
-		ErrorMessage: errorMessage,
-	}
-
-	err = tmpl.Execute(w, data)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
 }
 
 func logoutHandler(w http.ResponseWriter, r *http.Request) {
