@@ -48,22 +48,54 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 func getAllPosts() ([]Post, error) {
 	var posts []Post
 
+	// Exécute une requête SQL pour récupérer tous les posts
 	rows, err := db.Query("SELECT ID, Title, Content, UserID, Category, Likes FROM Post")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
+	// Parcourt les lignes résultantes et ajoute les posts à la liste
 	for rows.Next() {
 		var post Post
 		err := rows.Scan(&post.ID, &post.Title, &post.Content, &post.UserID, &post.Category, &post.Likes)
 		if err != nil {
 			return nil, err
 		}
+
+		// Récupère les commentaires pour chaque post
+		comments, err := getCommentsByPostID(post.ID)
+		if err != nil {
+			return nil, err
+		}
+
+		post.Comments = comments
+
 		posts = append(posts, post)
 	}
 
 	return posts, nil
+}
+
+func getCommentsByPostID(postID int) ([]Comment, error) {
+	var comments []Comment
+
+	rows, err := db.Query("SELECT ID, Comments, PostID FROM Comment WHERE PostID = ?", postID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var comment Comment
+		err := rows.Scan(&comment.ID, &comment.Comments, &comment.PostID)
+		if err != nil {
+			return nil, err
+		}
+		comments = append(comments, comment)
+	}
+
+	return comments, nil
 }
 
 // Récupérer tous les utilisateurs depuis la db
@@ -94,7 +126,7 @@ func signUpHandler(w http.ResponseWriter, r *http.Request) {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 
-		// Vérifiez si l'email existe déjà dans la base de données
+		// Vérifier si l'email existe déjà dans la base de données
 		var existingEmail string
 		err := db.QueryRow("SELECT Email FROM User WHERE Email = ?", email).Scan(&existingEmail)
 		if err == nil && existingEmail != "" {
